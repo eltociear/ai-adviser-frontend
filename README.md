@@ -1,1 +1,1 @@
-# eltociear-ai-adviser-frontend
+# ai-adviser-frontend
