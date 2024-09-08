@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> _sendToChatGPT(String message) async {
     final uri = Uri.parse('https://api.openai.com/v1/chat/completions');
-    final apiKey = 'YOUR OPENAI KEY'; // OpenAIのAPIキーを設定してください
+    final apiKey = ''; // OpenAIのAPIキーを設定してください
 
     final response = await http.post(
       uri,
@@ -41,7 +41,11 @@ class _MyHomePageState extends State<MyHomePage> {
       body: json.encode({
         'model': 'gpt-4o',
         'messages': [
-          {'role': 'system', 'content': '$message'},
+          {
+            'role': 'system',
+            'content':
+                "Understand the user's conversation, predict what they're interested in, and output what they're likely to be interested in. {$message}"
+          },
         ],
         'max_tokens': 150
       }),
