@@ -85,30 +85,32 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('Word Cloud ChatGPT'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _controller,
-              decoration: const InputDecoration(
-                labelText: '会話テキストを入力してください',
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: _controller,
+                decoration: const InputDecoration(
+                  labelText: '会話テキストを入力してください',
+                ),
+                maxLines: null,
               ),
-              maxLines: null,
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _analyseText,
-              child: const Text('予測してChatGPTに質問'),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'ChatGPTからの応答:',
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            Text(_response),
-          ],
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: _analyseText,
+                child: const Text('予測してChatGPTに質問'),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'ChatGPTからの応答:',
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              Text(_response),
+            ],
+          ),
         ),
       ),
     );
