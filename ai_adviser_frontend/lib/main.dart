@@ -1,3 +1,4 @@
+import 'package:ai_adviser_frontend/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -30,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> _sendToChatGPT(String message) async {
     final uri = Uri.parse('https://api.openai.com/v1/chat/completions');
-    final apiKey = ''; // OpenAIのAPIキーを設定してください
+    final apiKey = AppConstants.apiKey;
 
     final response = await http.post(
       uri,
