@@ -1,79 +1,29 @@
 import 'package:flutter/material.dart';
-import '../services/speech_recognition_service.dart';
-import '../services/chatgpt_service.dart';
-import '../services/text_to_speech_service.dart';
-import '../widgets/speech_recognition_button.dart';
-import '../widgets/chat_message_bubble.dart';
-import '../models/chat_message.dart';
+import 'package:provider/provider.dart';
+import '../services/chat_service.dart';
+import '../widgets/chat_message.dart';
+import '../widgets/voice_input_button.dart';
 
-class ChatScreen extends StatefulWidget {
-  @override
-  _ChatScreenState createState() => _ChatScreenState();
-}
-
-class _ChatScreenState extends State<ChatScreen> {
-  final SpeechRecognitionService _speechService = SpeechRecognitionService();
-  final ChatGPTService _chatGPTService = ChatGPTService();
-  final TextToSpeechService _ttsService = TextToSpeechService();
-
-  List<ChatMessage> _messages = [];
-  String _currentSpeech = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _speechService.initialize();
-  }
-
-  void _startListening() {
-    _speechService.startListening(
-      (text) {
-        setState(() {
-          _currentSpeech = text;
-        });
-      },
-      _onSilenceDetected,
-    );
-  }
-
-  void _onSilenceDetected() async {
-    if (_currentSpeech.isNotEmpty) {
-      setState(() {
-        _messages.add(ChatMessage(text: _currentSpeech, isUser: true));
-      });
-
-      final response = await _chatGPTService.generateResponse(_currentSpeech);
-      setState(() {
-        _messages.add(ChatMessage(text: response, isUser: false));
-      });
-
-      await _ttsService.speak(response);
-
-      setState(() {
-        _currentSpeech = '';
-      });
-    }
-  }
-
+class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('AI Assistant')),
+      appBar: AppBar(title: Text('Voice Chat')),
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: _messages.length,
-              itemBuilder: (context, index) {
-                return ChatMessageBubble(message: _messages[index]);
+            child: Consumer<ChatService>(
+              builder: (context, chatService, child) {
+                return ListView.builder(
+                  itemCount: chatService.messages.length,
+                  itemBuilder: (context, index) {
+                    return ChatMessage(message: chatService.messages[index]);
+                  },
+                );
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(_currentSpeech),
-          ),
-          SpeechRecognitionButton(onPressed: _startListening),
+          VoiceInputButton(),
         ],
       ),
     );
