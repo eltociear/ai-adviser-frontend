@@ -48,6 +48,10 @@ class ChatService extends ChangeNotifier {
     notifyListeners();
   }
 
+  void stopSpeaking() async {
+    await _flutterTts.stop();
+  }
+
   void _resetSilenceTimer() {
     _silenceTimer?.cancel();
     _silenceTimer = Timer(Duration(seconds: 3), () {

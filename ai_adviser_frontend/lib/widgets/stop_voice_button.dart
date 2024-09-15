@@ -9,7 +9,7 @@ class StopVoiceButton extends StatelessWidget {
       builder: (context, chatService, child) {
         return FloatingActionButton(
           onPressed: () {
-            chatService.stopListening();
+            chatService.stopSpeaking();
           },
           child: Icon(Icons.stop),
         );
