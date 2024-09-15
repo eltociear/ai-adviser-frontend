@@ -4,6 +4,8 @@ class SpeechService {
   final SpeechToText _speech = SpeechToText(); // SpeechToTextのインスタンスを作成
   bool _isListening = false; // 音声認識中かどうかを示すフラグ
 
+  bool get isListening => _isListening; // 音声認識中かどうかを取得するメソッド
+
   void initialize() async {
     await _speech.initialize(); // 音声認識を初期化
   }
