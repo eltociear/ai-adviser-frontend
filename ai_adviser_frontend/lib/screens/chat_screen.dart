@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import '../services/chat_service.dart';
 import '../widgets/chat_message.dart';
 import '../widgets/voice_input_button.dart';
+import '../widgets/stop_voice_button.dart';
+import '../widgets/reset_chat_button.dart';
 
 class ChatScreen extends StatelessWidget {
   @override
@@ -23,7 +25,14 @@ class ChatScreen extends StatelessWidget {
               },
             ),
           ),
-          VoiceInputButton(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              VoiceInputButton(),
+              StopVoiceButton(),
+              ResetChatButton(),
+            ],
+          ),
         ],
       ),
     );

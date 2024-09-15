@@ -96,4 +96,9 @@ class ChatService extends ChangeNotifier {
   Future<void> speakResponse(String response) async {
     await _flutterTts.speak(response);
   }
+
+  void resetChat() {
+    messages.clear();
+    notifyListeners();
+  }
 }

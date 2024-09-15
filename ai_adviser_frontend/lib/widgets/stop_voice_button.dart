@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/chat_service.dart';
 
-class VoiceInputButton extends StatelessWidget {
+class StopVoiceButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ChatService>(
       builder: (context, chatService, child) {
         return FloatingActionButton(
           onPressed: () {
-            chatService.startListening();
+            chatService.stopListening();
           },
-          child: Icon(Icons.mic_none),
+          child: Icon(Icons.stop),
         );
       },
     );
