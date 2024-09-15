@@ -8,7 +8,7 @@ class VoiceInputButton extends StatelessWidget {
     return Consumer<ChatService>(
       builder: (context, chatService, child) {
         return FloatingActionButton(
-          onPressed: () {
+          onPressed: chatService.isRequestInProgress ? null : () {
             chatService.startListening();
           },
           child: Icon(Icons.mic_none),

@@ -12,6 +12,7 @@ class ChatService extends ChangeNotifier {
   bool isListening = false;
   String currentSpeech = '';
   Timer? _silenceTimer;
+  bool isRequestInProgress = false; // P8855
 
   ChatService() {
     _initializeSpeech();
@@ -63,6 +64,9 @@ class ChatService extends ChangeNotifier {
   }
 
   Future<void> sendMessageToChatGPT(String message) async {
+    if (isRequestInProgress) return; // Pb374
+
+    isRequestInProgress = true; // P8fdc
     messages.add("User: $message");
     notifyListeners();
 
@@ -95,6 +99,8 @@ class ChatService extends ChangeNotifier {
     } else {
       print('Failed to get response from ChatGPT');
     }
+
+    isRequestInProgress = false; // P8fdc
   }
 
   Future<void> speakResponse(String response) async {
