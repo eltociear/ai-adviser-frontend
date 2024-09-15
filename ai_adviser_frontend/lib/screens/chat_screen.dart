@@ -8,7 +8,7 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Voice Chat')),
+      appBar: AppBar(title: Text('WiseFriend')),
       body: Column(
         children: [
           Expanded(
