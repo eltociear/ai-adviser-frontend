@@ -66,13 +66,18 @@ class ChatService extends ChangeNotifier {
       Uri.parse('https://api.openai.com/v1/chat/completions'),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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',
+        'Authorization':
+            'Bearer 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',
       },
       body: jsonEncode({
         "model": "gpt-4-turbo-2024-04-09",
         "messages": [
           {"role": "system", "content": "You are a helpful assistant."},
-          {"role": "user", "content": "Understand the user's conversation and output one thing that the user might be interested in. Then output the answer to that thing after the thing that interests you." + message}
+          {
+            "role": "user",
+            "content":
+                "Understand the user's conversation and provide advice as an expert in three lines. {$message}"
+          },
         ]
       }),
     );
