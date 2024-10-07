@@ -74,8 +74,7 @@ class ChatService extends ChangeNotifier {
       Uri.parse('https://api.openai.com/v1/chat/completions'),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization':
-            'Bearer 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',
+        'Authorization': 'Bearer {ここにOPENAI_API_KEYを入力}',
       },
       body: jsonEncode({
         "model": "gpt-4-turbo-2024-04-09",
@@ -97,7 +96,8 @@ class ChatService extends ChangeNotifier {
       notifyListeners();
       speakResponse(reply);
     } else {
-      print('Failed to get response from ChatGPT');
+      print(
+          'Failed to get response from ChatGPT >>status code: ${response.statusCode}');
     }
 
     isRequestInProgress = false; // P8fdc
